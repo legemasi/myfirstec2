@@ -1,0 +1,39 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+
+  "Description": "AWS CloudFormation Sample Template.",
+  "Parameters": {
+    "InstanceTypeParameter": {
+      "Type": "String",
+      "Default": "t2.micro",
+      "AllowedValues": [ "t2.micro", "m1.small", "m1.large" ],
+      "Description": "Enter t2.micro, m1.small, or m1.large. Default is t2.micro."
+    },
+    "KeyName": {
+      "Type": "String",
+      "Default": "Johntestkey"
+    }
+
+  },
+  "Resources": {
+    "EC2Instance": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "AvailabilityZone": "us-east-1e",
+        "ImageId": "ami-098f16afa9edf40be",
+        "InstanceType": { "Ref": "InstanceTypeParameter" },
+        "KeyName": { "Ref": "KeyName" },
+        "SecurityGroupIds": [ "sg-01e9d175794c35ceb" ],
+        "SubnetId": "subnet-000ab65fdf7daba00"
+      }
+    }
+  },
+ "Outputs": {
+    "InstanceId": {
+      "Description": "InstanceId of the newly created Mysql instance",
+      "Value": { "Ref": "EC2Instance" }
+    }
+
+
+  }
+}
